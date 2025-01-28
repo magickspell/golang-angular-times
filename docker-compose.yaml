@@ -1,11 +1,15 @@
+version: '3.8'
+
 services:
 
   mongo:
     image: mongo
     restart: always
+    ports:
+      - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpass
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
 
   mongo-express:
     image: mongo-express
@@ -13,16 +17,26 @@ services:
     ports:
       - 8081:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
-      ME_CONFIG_MONGODB_URL: mongodb://root:rootpass@mongo:27017/
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ROOT_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ROOT_PASSWORD}
+      ME_CONFIG_MONGODB_URL: mongodb://${MONGO_ROOT_USER}:${MONGO_ROOT_PASSWORD}@mongo:27017/
       ME_CONFIG_BASICAUTH: false
-
 
   go-app:
     working_dir: /go-app-dir
     build: ./backend
-    volumes: ./backend:/go-app-dir
-    ports: "8080:8080"
+    volumes:
+      - ./backend:/go-app-dir
+    ports:
+      - "8080:8080"
 
   angular-app:
+    image: node:23-bullseye
+    working_dir: /angular-app-dir
+    volumes: 
+      - ./frontend:/angular-app-dir
+    ports:
+      - "3000:4200"
+    command: >
+      sh -c "npm install && npm start"
+# sh -c "npm install && npm run build -- --watch"

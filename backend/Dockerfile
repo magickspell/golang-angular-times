@@ -6,7 +6,7 @@ RUN go install github.com/air-verse/air@latest
 
 # COPY go.mod go.sum ./
 # COPY ./golang/go.mod ./
-COPY ./golang ./
+COPY ./ ./
 
 RUN go mod download
 

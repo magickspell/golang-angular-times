@@ -10,3 +10,5 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'frontend';
 }
+
+// todo не запускается Angular в докер композиции - разобраться

@@ -6,5 +6,5 @@ import (
 )
 
 func HelloGo(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "GO")
+	fmt.Fprintf(w, "GO 2")
 }

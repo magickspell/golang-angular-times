@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
+	db "backend/db"
 	handlers "backend/http"
 )
 
 func main() {
 	fmt.Println("Server started on port: 8080")
-	// db.InitDB()
+	db.InitDB()
 
 	http.HandleFunc("/go", handlers.HelloGo)
 	http.HandleFunc("/login", handlers.Login)

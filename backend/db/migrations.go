@@ -21,11 +21,15 @@ type Schedule struct {
 }
 
 var (
-	mongoClient *mongo.Client
+	mongoClient         *mongo.Client
+	MONGO_ROOT_USER     = "root"
+	MONGO_ROOT_PASSWORD = "rootpass"
 )
 
 func InitDB() {
-	clientOptions := options.Client().ApplyURI("mongodb://mongodb:27017")
+	// todo нужно проверить что данных нет в БД или удалить все и вставить данные заного
+	// todo нужно подрубить ENV
+	clientOptions := options.Client().ApplyURI("mongodb://root:rootpass@mongo:27017")
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
