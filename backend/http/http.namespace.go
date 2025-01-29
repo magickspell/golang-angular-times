@@ -1,10 +1,7 @@
 package http
 
-import "go.mongodb.org/mongo-driver/mongo"
-
 var (
-	MongoClient *mongo.Client
-	JwtSecret   = []byte("your-jwt-secret")
+	JwtSecret = []byte("your-jwt-secret")
 )
 
 type User struct {

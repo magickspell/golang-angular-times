@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AuthService } from './auth/auth.service';
+import { AuthComponent } from './auth/auth.component';
+import { SchedulerComponent } from './scheduler/scheduler.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AuthComponent, SchedulerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'frontend';
-}
 
-// todo не запускается Angular в докер композиции - разобраться
+  constructor(public authService: AuthService) {}
+}

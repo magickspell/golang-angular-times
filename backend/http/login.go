@@ -1,6 +1,7 @@
 package http
 
 import (
+	db "backend/db"
 	"context"
 	"encoding/json"
 	"net/http"
@@ -18,7 +19,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	collection := MongoClient.Database("app").Collection("users")
+	collection := db.MongoClient.Database("app").Collection("users")
 	var result User
 	err = collection.FindOne(context.TODO(), bson.M{"email": user.Email, "password": user.Password}).Decode(&result)
 	if err != nil {
@@ -37,5 +38,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write([]byte(tokenString))
+	response := map[string]string{
+		"token": tokenString,
+	}
+	json.NewEncoder(w).Encode(response)
 }

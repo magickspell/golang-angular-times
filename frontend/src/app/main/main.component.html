@@ -1,0 +1,17 @@
+<h2>Расписание:</h2>
+
+<div>
+@for(schedule of schedules; track schedule.Day) {
+  <div>
+    <label for="time">{{ schedule.Day }}</label>
+    <br>
+    <input title="time" [disabled]="!authService.isLoggedIn" [value]="[schedule.Start, '|', schedule.End]">
+    <br>
+    <br>
+  </div>
+}
+</div>
+
+@if (authService.isLoggedIn()) {
+  <button (click)="saveSchedules()">Сохранить</button>
+}
