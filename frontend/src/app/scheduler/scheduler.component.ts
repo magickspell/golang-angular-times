@@ -13,7 +13,6 @@ export type ScheduleDTO = {
 @Component({
   selector: 'app-scheduler',
   templateUrl: './scheduler.component.html',
-  styleUrls: ['./scheduler.component.scss'],
   imports: [AuthComponent, FormsModule]
 })
 export class SchedulerComponent implements OnInit {

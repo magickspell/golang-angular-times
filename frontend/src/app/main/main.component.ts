@@ -15,7 +15,6 @@ const SELECT_DAY: string = "выберите день";
 })
 export class MainComponent implements OnInit {
   schedules: ScheduleDTO[] = [];
-  isLoggedIn = false;
   hours: number = 0;
   minutes: number = 0;
   day: string = SELECT_DAY;
@@ -26,8 +25,6 @@ export class MainComponent implements OnInit {
     this.scheduleService.getSchedules().subscribe((data: any) => {
       this.schedules = data;
     });
-
-    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   checkTime(hour: number, minute: number, day: string) {
