@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css'],
+  styleUrls: ['./auth.component.scss'],
   imports: [ReactiveFormsModule]
 })
 export class AuthComponent {
@@ -14,16 +14,11 @@ export class AuthComponent {
     password: new FormControl(''),
   });
 
-  constructor(public authService: AuthService) {
-    const token: string | null = window.localStorage.getItem("auth-token");
-    console.log(`token: ${token}`);
-    // console.log(`isLoggedIn: ${this.authService.isLoggedIn().subscribe(val => val.valueOf())}`);
-    console.log(`isLoggedIn: ${this.authService}`);
-  }
+  constructor(public authService: AuthService) {}
 
   login() {
     if (!this.profileForm.value.email || !this.profileForm.value.password) {
-      window.alert("empty fields!");
+      window.alert("Введите логин и пароль");
       return;
     }
 

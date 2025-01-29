@@ -1,14 +1,9 @@
-<style>
-  * {
-    font-size: 14;
-  }
-</style>
-
 <header>
-  <app-auth></app-auth>
+  <nav class="navigation">
+    <a routerLink="/">Расписание</a>
+    |
+    <a routerLink="/settings">Настройки</a>
+  </nav>
 </header>
-<main>
-  <app-scheduler></app-scheduler>
-</main>
 
 <router-outlet></router-outlet>

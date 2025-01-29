@@ -16,12 +16,10 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    // return this.loggedIn.asObservable();
     return this.loggedIn;
   }
 
   setLoggedIn(value: boolean) {
-    // this.loggedIn.next(value);
     this.loggedIn = value;
   }
 
@@ -30,7 +28,6 @@ export class AuthService {
   }
 
   logout() {
-    // this.loggedIn.next(false);
     this.loggedIn = false;
   }
 }

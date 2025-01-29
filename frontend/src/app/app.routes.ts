@@ -5,6 +5,5 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'scheduler', component: SchedulerComponent },
-  { path: 'login', component: AuthComponent },
+  { path: 'settings', component: SchedulerComponent },
 ];

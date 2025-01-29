@@ -1,17 +1,11 @@
-<h2>Расписание:</h2>
-
-<div>
-@for(schedule of schedules; track schedule.Day) {
-  <div>
-    <label for="time">{{ schedule.Day }}</label>
-    <br>
-    <input title="time" [disabled]="!authService.isLoggedIn" [value]="[schedule.Start, '|', schedule.End]">
-    <br>
-    <br>
-  </div>
-}
+<h2>Проверка даты и времени:</h2>
+<div class="tester">
+  <input type="number" placeholder="часы" min="0" max="23" [(ngModel)]="hours">
+  <input type="number" placeholder="минуты" min="0" max="59" [(ngModel)]="minutes">
+  <select [(ngModel)]="day">
+    @for(schedule of schedules; track schedule.Day) {
+      <option [value]="schedule.Day">{{ schedule.Day }}</option>
+    }
+  </select>
+  <button (click)="checkTime(hours, minutes, day)">Проверить</button>
 </div>
-
-@if (authService.isLoggedIn()) {
-  <button (click)="saveSchedules()">Сохранить</button>
-}

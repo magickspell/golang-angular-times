@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { AuthComponent } from './auth/auth.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AuthComponent, SchedulerComponent],
+  imports: [RouterOutlet, RouterLink, AuthComponent, SchedulerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

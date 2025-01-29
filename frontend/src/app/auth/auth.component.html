@@ -1,22 +1,14 @@
-<nav>
-  <a routerLink="/">Home</a>
-  |
-  <a routerLink="/user">User</a>
-</nav>
-
-<br>
-<br>
-
-<form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
-  @if (!authService.isLoggedIn()) {
-    <div>
-      <input type="email" placeholder="почта" formControlName="email" />
-      <br>
-      <input type="password" placeholder="пароль" formControlName="password" />
-      <br>
-      <button type="button" (click)="login()">Войти</button>
-    </div>
-  } @else {
-    <button type="button" (click)="logout()">Выйти</button>
-  }
-</form>
+<h2>Авторизация:</h2>
+<div class="login">
+    @if (!authService.isLoggedIn()) {
+      <form  [formGroup]="profileForm">
+        <input type="email" placeholder="почта" formControlName="email" />
+        <br>
+        <input type="password" placeholder="пароль" formControlName="password" />
+        <br>
+        <button type="button" (click)="login()">Войти</button>
+      </form>
+    } @else {
+      <button type="button" (click)="logout()">Выйти</button>
+    }
+</div>
