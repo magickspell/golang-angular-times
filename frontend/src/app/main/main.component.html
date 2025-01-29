@@ -1,11 +1,18 @@
 <h2>Проверка даты и времени:</h2>
 <div class="tester">
+  <label> часы: </label>
   <input type="number" placeholder="часы" min="0" max="23" [(ngModel)]="hours">
+  <label> минуты: </label>
   <input type="number" placeholder="минуты" min="0" max="59" [(ngModel)]="minutes">
-  <select [(ngModel)]="day">
+  <br>
+  <br>
+  <label> день недели: </label>
+  <select [(ngModel)]="day" aria-placeholder="-">
     @for(schedule of schedules; track schedule.Day) {
       <option [value]="schedule.Day">{{ schedule.Day }}</option>
     }
   </select>
+  <br>
+  <br>
   <button (click)="checkTime(hours, minutes, day)">Проверить</button>
 </div>

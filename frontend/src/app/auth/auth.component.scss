@@ -1,0 +1,24 @@
+.login {
+  padding: 0 12px;
+  background-color: lightgoldenrodyellow;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  div {
+    height: 48;
+
+    button {
+      width: 100%;
+      border: 1px solid gray;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+
+  input {
+    outline: none;
+    border: 1px solid gray;
+  }
+}

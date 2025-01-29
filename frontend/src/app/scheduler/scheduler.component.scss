@@ -1,0 +1,25 @@
+.scheduler {
+  padding: 12px;
+  background-color: lightgoldenrodyellow;
+  height: 440px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  
+  div {
+    height: 48;
+
+    button {
+      width: 100%;
+      border: 1px solid gray;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+
+  input {
+    outline: none;
+    border: 1px solid gray;
+  }
+}

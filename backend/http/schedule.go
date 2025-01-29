@@ -39,18 +39,22 @@ func GetSchedule(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateSchedule(w http.ResponseWriter, r *http.Request) {
-	var schedule Schedule
-	err := json.NewDecoder(r.Body).Decode(&schedule)
+	// todo сделать проверки
+	var schedules []Schedule
+	err := json.NewDecoder(r.Body).Decode(&schedules)
+	fmt.Println("[schedule]", schedules)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	collection := db.MongoClient.Database("app").Collection("schedule")
-	_, err = collection.UpdateOne(context.TODO(), bson.M{"day": schedule.Day}, bson.M{"$set": bson.M{"start": schedule.Start, "end": schedule.End}})
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+	for _, schedule := range schedules {
+		_, err = collection.UpdateOne(context.TODO(), bson.M{"day": schedule.Day}, bson.M{"$set": bson.M{"start": schedule.Start, "end": schedule.End}})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 	}
 	w.WriteHeader(http.StatusOK)
 }
@@ -106,10 +110,8 @@ func CheckSchedule(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if !requestTime.Before(startTime) && (!requestTime.After(endTime) || requestTime.Equal(endTime)) {
-		// w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(map[string]bool{"allowed": true})
 	} else {
-		// w.WriteHeader(http.StatusForbidden)
-		json.NewEncoder(w).Encode(map[string]bool{"allowed": true})
+		json.NewEncoder(w).Encode(map[string]bool{"allowed": false})
 	}
 }

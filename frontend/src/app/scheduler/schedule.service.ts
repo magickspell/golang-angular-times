@@ -18,7 +18,7 @@ export class ScheduleService {
   updateSchedules(schedules: ScheduleDTO[]) {
     console.log(`[schedules]`);
     console.log(schedules);
-    return this.http.post('http://localhost:8080/schedules', schedules);
+    return this.http.post('http://localhost:8080/update-schedule', schedules);
   }
 
   checkTime(hour: number, minute: number, day: string): Observable<{allowed?: boolean}>  {

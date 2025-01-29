@@ -1,0 +1,22 @@
+<app-auth></app-auth>
+
+<h2>Расписание:</h2>
+<div class="scheduler">
+@for(schedule of schedules; track schedule.Day) {
+  <div>
+    <label for="time">{{ schedule.Day }}</label>
+    <br>
+    <div>
+      <label> c: </label>
+      <input title="time" [disabled]="!authService.isLoggedIn()" [(ngModel)]="schedule.Start">
+      <label> до: </label>
+      <input title="time" [disabled]="!authService.isLoggedIn()" [(ngModel)]="schedule.End">
+    </div>
+    <br>
+  </div>
+}
+
+@if (authService.isLoggedIn()) {
+  <button (click)="saveSchedules()">Сохранить</button>
+}
+</div>
