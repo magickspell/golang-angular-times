@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AUTH_TOKEN, AuthService } from './auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -23,14 +23,14 @@ export class AuthComponent {
     }
 
     this.authService.login(this.profileForm.value.email, this.profileForm.value.password).subscribe((response) => {
-      window.localStorage.setItem("auth-token", response.token);
+      window.localStorage.setItem(AUTH_TOKEN, response.token);
       this.authService.setLoggedIn(true);
     });
   }
 
   logout() {
     this.authService.logout();
-    window.localStorage.removeItem("auth-token");
+    window.localStorage.removeItem(AUTH_TOKEN);
   }
 
 

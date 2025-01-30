@@ -11,7 +11,7 @@ export class AuthService {
   private loggedIn = false;
 
   constructor(private http: HttpClient) {
-    const token: string | null = window.localStorage.getItem("auth-token");
+    const token: string | null = window.localStorage.getItem(AUTH_TOKEN);
     this.loggedIn = token ? true : false;
   }
 
