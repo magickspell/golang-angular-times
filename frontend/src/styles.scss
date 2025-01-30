@@ -1,11 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: lightblue;
+  background-color: rgba(40, 120, 0, 0.600);
   max-width: 600px !important;
 }
 
 button {
   cursor: pointer;
+  transition: 0.25s;
+  width: 80px;
+  height: 24px;
+  background-color: gainsboro;
+  border-radius: 4px;
+  border: 1px solid darkgreen;
+
+  &:hover {
+    background-color: lavender;
+  }
 }
 
 .scheduler {
@@ -16,6 +26,8 @@ button {
   justify-content: start;
   align-items: start;
   flex-direction: column;
+  border-radius: 12px;
+  border: 2px solid black;
   
   div {
     height: 48;

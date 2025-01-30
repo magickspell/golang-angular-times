@@ -5,20 +5,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 12px;
+  border: 2px solid black;
   
   div {
     height: 48;
+  }
 
-    button {
-      width: 100%;
-      border: 1px solid gray;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+  button {
+    width: 183px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
   input {
     outline: none;
     border: 1px solid gray;
+    margin-bottom: 2px;
   }
 }

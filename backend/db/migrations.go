@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -37,7 +38,7 @@ func checkMigrations() bool {
 
 	count, err := collection.CountDocuments(context.TODO(), bson.M{})
 	if err != nil {
-		fmt.Println("[checkMigrations][Error][counting documents]", err)
+		fmt.Println("[checkMigrations][Error][count]", err)
 		return true
 	}
 	if count > 0 {
@@ -51,13 +52,18 @@ func checkMigrations() bool {
 		return true
 	}
 
-	fmt.Println("[checkMigrations][migration saved]")
 	return false
 }
 
 func InitDB() {
-	// todo нужно подрубить ENV
-	clientOptions := options.Client().ApplyURI("mongodb://root:rootpass@mongo:27017")
+	mongoUser := os.Getenv("MONGO_ROOT_USER")
+	mongoPass := os.Getenv("MONGO_ROOT_PASSWORD")
+	uri := fmt.Sprintf("mongodb://%s:%s@mongo:27017",
+		mongoUser,
+		mongoPass,
+	)
+
+	clientOptions := options.Client().ApplyURI(uri)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
@@ -68,9 +74,8 @@ func InitDB() {
 	}
 	MongoClient = client
 
-	// Check migrations
-	check := checkMigrations()
-	if check {
+	isMigrated := checkMigrations()
+	if isMigrated {
 		return
 	}
 

@@ -7,8 +7,6 @@ This is fullstack app that can store and operate with time table.
 <br>
 <b>Techies</b>: Angular, MongoDB, Docker.
 <br>
-<b>Reqs</b>: Docker.
-<br>
 <hr>
 
 ### How to start local:

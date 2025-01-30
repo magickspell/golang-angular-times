@@ -23,7 +23,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	var result User
 	err = collection.FindOne(context.TODO(), bson.M{"email": user.Email, "password": user.Password}).Decode(&result)
 	if err != nil {
-		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
+		http.Error(w, "[Login][Error][credentials]", http.StatusUnauthorized)
 		return
 	}
 
@@ -34,7 +34,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	tokenString, err := token.SignedString(JwtSecret)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "[Login][Error][tokenString]", http.StatusInternalServerError)
 		return
 	}
 

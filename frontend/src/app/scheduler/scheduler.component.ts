@@ -32,8 +32,6 @@ export class SchedulerComponent implements OnInit {
   saveSchedules() {
     let isErr: boolean = false;
     for (const schedule of this.schedules) {
-      console.log(`[schedule]`)
-      console.log(schedule)
       if(!this.checkTime(schedule.Start, schedule.End)) {
         isErr = true;
         break;
@@ -44,7 +42,6 @@ export class SchedulerComponent implements OnInit {
       return;
     }
 
-    // todo проверить что бросается ошибка в случае неправильного адрес например
     this.scheduleService.updateSchedules(this.schedules).subscribe(() => {
       alert('График обновлен');
     });

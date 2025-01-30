@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	db "backend/db"
 	handlers "backend/http"
+
+	"github.com/joho/godotenv"
 )
 
 func cors(next http.HandlerFunc) http.HandlerFunc {
@@ -27,6 +30,11 @@ func cors(next http.HandlerFunc) http.HandlerFunc {
 
 func main() {
 	fmt.Println("Server started on port: 8080")
+
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error laoding .env")
+	}
+
 	db.InitDB()
 
 	http.HandleFunc("/go", cors(handlers.HelloGo))
@@ -37,6 +45,6 @@ func main() {
 
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
-		fmt.Println("Error starting server: 8080")
+		fmt.Println("Error on server")
 	}
 }

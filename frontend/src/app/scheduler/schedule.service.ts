@@ -16,9 +16,13 @@ export class ScheduleService {
   }
 
   updateSchedules(schedules: ScheduleDTO[]) {
-    console.log(`[schedules]`);
-    console.log(schedules);
-    return this.http.post('http://localhost:8080/update-schedule', schedules);
+    return this.http.post('http://localhost:8080/update-schedule', schedules).pipe(
+      catchError(error => {
+        console.warn('Error:', error);
+        window.alert("Произошла ошибка при выполнении запроса");
+        return throwError(error);
+      })
+    );
   }
 
   checkTime(hour: number, minute: number, day: string): Observable<{allowed?: boolean}>  {
@@ -42,12 +46,7 @@ export class ScheduleService {
       day: day
     })
 
-    // todo решить что оставлять
-    // return this.http.post('http://localhost:8080/check1', request) as unknown as Observable<{allowed?: boolean}>;
     return this.http.post<{allowed?: boolean}>('http://localhost:8080/check', request).pipe(
-      tap(response => {
-        console.log('Response:', response);
-      }),
       catchError(error => {
         console.warn('Error:', error);
         window.alert("Произошла ошибка при выполнении запроса");
