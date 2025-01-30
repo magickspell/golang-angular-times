@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 export const AUTH_TOKEN = "auth-token";
 
@@ -24,7 +24,13 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<{token: string}> {
-    return this.http.post('http://localhost:8080/login', { email, password }) as unknown as Observable<{token: string}>;
+    return this.http.post('http://localhost:8080/login', { email, password }).pipe(
+      catchError(error => {
+        console.warn('Error:', error);
+        window.alert("Ошибка авторизации");
+        return throwError(error);
+      })
+    ) as unknown as Observable<{token: string}>;
   }
 
   logout() {
